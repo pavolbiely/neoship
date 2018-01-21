@@ -281,7 +281,7 @@ class Neoship
 	 * @return bool
 	 * @throws \Neoship\NeoshipException
 	 */
-	public function requestAccessTokenRequest() : bool
+	public function requestAccessToken() : bool
 	{
 		$url = $this->getApiUrl() . '/oauth/v2/token?' . http_build_query([
 			'client_id' => $this->getClientId(),
@@ -294,7 +294,7 @@ class Neoship
 		try {
 			$response = $this->sendHttpRequest($url);
 		} catch (\Exception $e) {
-			throw new NeoshipException('Could not access API', NULL, $e);
+			throw new NeoshipException('Could not access API', 0, $e);
 		}
 
 		if (!($data = @json_decode($response, true))) {

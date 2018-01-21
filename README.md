@@ -38,7 +38,7 @@ After successful authorization you will be redirected from the Neoship website t
 ```php
 try {
     $neoship->setCode($_GET['code']); // set up OAuth authorization code
-    if ($neoship->requestAccessTokenRequest()) { // exchange OAuth code for an access token
+    if ($neoship->requestAccessToken()) { // exchange OAuth code for an access token
         // we got the token
         print_r($neoship->getToken());
     }
