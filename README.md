@@ -47,12 +47,18 @@ try {
 ```
 
 As long as the token is valid you can call any API call.
+The following code shows an example of how to send a simple package.
 
 ```php
-echo "Packages count: " . $neoship->apiGetPackageCount() . "\n";
+$sender = new Address('Harry Potter', 'Webtec', 'Magnetová 1', '831 04', 'Bratislava', Address::STATE_SK);
+$recipient = new Address('Albus Dumbledore', 'Neonus', 'Miestneho priemyslu 1247', '029 01', 'Námestovo', Address::STATE_SK);
+$cashOnDelivery = new Payment(10.0, Payment::CURRENCY_EUR, Payment::TYPE_VIAMO);
+$insurance = new Payment(2500.0);
+$package = new Package(123, $recipient, $sender, '1201800002');
+$neoship->apiPostPackage($package);
 ```
 
-Access token is typically valid for 1 hour. If a token is found to be invalid  `NeoshipException` is thrown. In this case it is necessary to repeat the whole process of obtaining the access token from the very beginning.
+Access token is typically valid for 1 hour. If a token is found to be invalid  `Neoship\NeoshipException` is thrown. In this case it is necessary to repeat the whole process of obtaining the access token from the very beginning.
 
 ## API overview
 Method | Description
@@ -68,7 +74,7 @@ Method | Description
 `apiGetPackageCount()` | Returns count of packages for current user
 `apiGetPackagePage(int $page)` | Returns requested page of packages (each page has 50 packages)
 `apiPostPackagePrice(array $prices)` | Calculates price of package
-`apiPostPackage(array $package)` | Creates new package
+`apiPostPackage(Neoship\Package $package)` | Creates new package
 `apiPutPackage(int $id, array $package)` | Edits existing package
 `apiDeletePackage(int $id)` | Deletes package
 `apiGetPackageSticker(array $ref, int $template = 0)` | Outputs sticker PDF to browser for download
