@@ -8,7 +8,7 @@ Please ask [Neoship](https://info.neoship.sk/sk/kontakt) for credentials in orde
 ## Installation
 
 Use composer to install this package.
-```php
+```
 composer install pavolbiely/neoship
 ```
 
