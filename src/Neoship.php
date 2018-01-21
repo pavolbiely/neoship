@@ -490,12 +490,12 @@ class Neoship
 
 	/**
 	 * Creates new package
-	 * @param array array of package info, refer to http://neoship.sk/help/api-volania#package for array content
+	 * @param \Neoship\Package
 	 * @return \stdClass
 	 */
-	public function apiPostPackage(array $package)
+	public function apiPostPackage(Package $package)
 	{
-		return $this->sendApiRequest('package', 'POST', $package);
+		return $this->sendApiRequest('package', 'POST', $package->asArray());
 	}
 
 
@@ -570,10 +570,4 @@ class Neoship
 	{
 		return $this->sendApiRequest('packagemat/boxes', 'GET');
 	}
-}
-
-
-
-class NeoshipException extends \Exception
-{
 }
