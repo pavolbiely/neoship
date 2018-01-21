@@ -19,9 +19,6 @@ class Neoship
 	/* @var string */
 	protected $apiUrl;
 
-	/** @var string */
-	protected $code;
-
 	/** @var object */
 	protected $token;
 
@@ -166,28 +163,6 @@ class Neoship
 
 	/**
 	 * @param string
-	 * @return self
-	 */
-	public function setCode(string $code = NULL) : self
-	{
-		$this->code = $code;
-		return $this;
-	}
-
-
-
-	/**
-	 * @return string
-	 */
-	public function getCode() : ?string
-	{
-		return $this->code;
-	}
-
-
-
-	/**
-	 * @param string
 	 * @param string
 	 * @param int
 	 * @param string
@@ -281,13 +256,13 @@ class Neoship
 	 * @return bool
 	 * @throws \Neoship\NeoshipException
 	 */
-	public function requestAccessToken() : bool
+	public function requestAccessToken(string $code) : bool
 	{
 		$url = $this->getApiUrl() . '/oauth/v2/token?' . http_build_query([
 			'client_id' => $this->getClientId(),
 			'client_secret' => $this->getClientSecret(),
 			'grant_type' => 'authorization_code',
-			'code' => $this->getCode(),
+			'code' => $code,
 			'redirect_uri' => $this->getRedirectUrl(),
 		]);
 

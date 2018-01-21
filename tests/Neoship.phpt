@@ -19,7 +19,6 @@ Assert::exception(function () use ($neoship) {
 
 Assert::same(false, $neoship->isAuthorized());
 
-$neoship->setCode('asdf');
 $neoship->setToken('abc', 'xyz', 3600, 'bearer', NULL);
 
 Assert::same('123', $neoship->getClientId());
@@ -28,7 +27,6 @@ Assert::same('http://example.org', $neoship->getRedirectUrl());
 Assert::same($tempDir, $neoship->getTempDir());
 Assert::same(Neoship::API_URL_DEVELOPMENT, $neoship->getApiUrl());
 Assert::same(Neoship::API_URL_DEVELOPMENT . '/oauth/v2/auth?client_id=123&response_type=code&redirect_uri=http%3A%2F%2Fexample.org', $neoship->getAuthorizationUrl());
-Assert::same('asdf', $neoship->getCode());
 Assert::same(true, $neoship->isAuthorized());
 
 $token = (array) $neoship->getToken();
