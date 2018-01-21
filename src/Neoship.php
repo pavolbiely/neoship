@@ -304,7 +304,7 @@ class Neoship
 	protected function sendHttpRequest(string $url, string $type = 'GET', array $data = []) : string
 	{
 		$types = ['GET', 'POST', 'PUT', 'DELETE'];
-		if (in_array($type, $types)) {
+		if (!in_array($type, $types)) {
 			throw new NeoshipException('Only the following requests type are allowed: ' . implode(', ', $types));
 		}
 
