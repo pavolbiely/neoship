@@ -2,4 +2,5 @@
 /vendor/*
 /tests/test.log
 /tests/coverage.html
+/tests/output/*
 /composer.lock
