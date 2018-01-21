@@ -12,7 +12,7 @@ $recipient = new Address('Test Tester 2', 'Viamedia SK', 'Testovacia 2', '831 05
 $cashOnDelivery = new Payment(10.0, Payment::CURRENCY_EUR, Payment::TYPE_VIAMO);
 $insurance = new Payment(2500.0);
 
-$package = new Package(123, $recipient, $sender, '1201800002', '1201800001');
+$package = new Package(123, $sender, $recipient, '1201800002', '1201800001');
 $package->setPrice(100.0, 20);
 $package->setCashOnDelivery($cashOnDelivery);
 $package->setInsurance($insurance);

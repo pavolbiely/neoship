@@ -103,7 +103,7 @@ class Package
 	 * @param string
 	 * @param string
 	 */
-	public function __construct(int $id, Address $recipient, Address $sender, string $variableNumber = NULL, $mainPackageNumber = NULL)
+	public function __construct(int $id, Address $sender, Address $recipient, string $variableNumber = NULL, $mainPackageNumber = NULL)
 	{
 		$this->setId($id);
 		$this->setSender($sender);

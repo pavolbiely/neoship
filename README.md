@@ -47,11 +47,22 @@ As long as the token is valid you can call any API call.
 The following code shows an example of how to send a simple package.
 
 ```php
+// prepare sender and recipient addresses
 $sender = new Address('Harry Potter', 'Webtec', 'Magnetová 1', '831 04', 'Bratislava', Address::STATE_SK);
 $recipient = new Address('Albus Dumbledore', 'Neonus', 'Miestneho priemyslu 1247', '029 01', 'Námestovo', Address::STATE_SK);
-$cashOnDelivery = new Payment(10.0, Payment::CURRENCY_EUR, Payment::TYPE_VIAMO);
-$insurance = new Payment(2500.0);
+
+// create package
 $package = new Package(123, $recipient, $sender, '1201800002');
+
+// use the following code if the package is sent by cash on delivery payment
+$cashOnDelivery = new Payment(10.0, Payment::CURRENCY_EUR, Payment::TYPE_VIAMO);
+$package->setCashOnDelivery($cashOnDelivery);
+
+// use the following code if the package is insured
+$insurance = new Payment(2500.0);
+$package->setInsurance($insurance);
+
+// send a package through the Neoship API
 $neoship->apiPostPackage($package);
 ```
 
