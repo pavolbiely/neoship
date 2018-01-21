@@ -43,10 +43,9 @@ class Neoship
 		$this->setApiUrl($apiUrl);
 
 		if ($tempDir === NULL) {
-			$this->tempDir = sys_get_temp_dir();
-		} else {
-			$this->tempDir = rtrim($tempDir, '/');
+			$tempDir = sys_get_temp_dir();
 		}
+		$this->tempDir = rtrim($tempDir, '/');
 	}
 
 
