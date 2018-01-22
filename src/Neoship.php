@@ -312,7 +312,7 @@ class Neoship
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 		if (($response = curl_exec($ch)) === false) {
 			throw new \RuntimeException('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
 		}
