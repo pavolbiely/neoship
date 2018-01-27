@@ -18,8 +18,8 @@ use Neoship\NeoshipException;
 
 $clientId = ''; // client secret is provided from Neonus
 $clientSecret = ''; // client secret is provided from Neonus
-$redirectUrl = 'https://...'; // URL where Neoship will redirect you after you authorize it to exchange OAuth code for an access token
-$neoship = new Neoship($clientId, $clientSecret, $redirectUrl);
+$redirectUri = 'https://...'; // URL where Neoship will redirect you after you authorize it to exchange OAuth code for an access token
+$neoship = new Neoship($clientId, $clientSecret, $redirectUri);
 ```
 
 To gain access to the API you must first get an OAuth code that you will later exchange for the access token.
@@ -30,7 +30,7 @@ header('Location: ' . $authUrl);
 exit;
 ```
 
-After successful authorization you will be redirected from the Neoship website to a URL in the `$redirectUrl` variable.
+After successful authorization you will be redirected from the Neoship website to a URL in the `$redirectUri` variable.
 
 ```php
 try {

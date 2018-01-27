@@ -14,7 +14,7 @@ class Neoship
 	protected $clientSecret;
 
 	/* @var string */
-	protected $redirectUrl;
+	protected $redirectUri;
 
 	/* @var string */
 	protected $apiUrl;
@@ -35,11 +35,11 @@ class Neoship
 	 * @param string
 	 * @throws \Neoship\NeoshipException
 	 */
-	public function __construct(string $clientId, string $clientSecret, string $redirectUrl, string $apiUrl = self::API_URL_PRODUCTION, string $tempDir = NULL)
+	public function __construct(string $clientId, string $clientSecret, string $redirectUri, string $apiUrl = self::API_URL_PRODUCTION, string $tempDir = NULL)
 	{
 		$this->setClientId($clientId);
 		$this->setClientSecret($clientSecret);
-		$this->setRedirectUrl($redirectUrl);
+		$this->setRedirectUri($redirectUri);
 		$this->setApiUrl($apiUrl);
 
 		if ($tempDir === NULL) {
@@ -99,12 +99,12 @@ class Neoship
 	 * @return self
 	 * @throws \Neoship\NeoshipException
 	 */
-	protected function setRedirectUrl(string $url = NULL) : self
+	protected function setRedirectUri(string $uri = NULL) : self
 	{
-		if ($url === NULL || filter_var($url, FILTER_VALIDATE_URL)) {
-			$this->redirectUrl = $url;
+		if ($uri === NULL || filter_var($uri, FILTER_VALIDATE_URL)) {
+			$this->redirectUri = $uri;
 		} else {
-			throw new NeoshipException('Invalid redirect URL format');
+			throw new NeoshipException('Invalid redirect URI format');
 		}
 
 		return $this;
@@ -115,9 +115,9 @@ class Neoship
 	/**
 	 * @return string
 	 */
-	public function getRedirectUrl() : string
+	public function getRedirectUri() : string
 	{
-		return $this->redirectUrl;
+		return $this->redirectUri;
 	}
 
 
@@ -211,7 +211,7 @@ class Neoship
 	 */
 	protected function getTokenFile() : string
 	{
-		return $this->tempDir . '/' . md5(implode('|', [$this->clientId, $this->clientSecret, $this->redirectUrl]));
+		return $this->tempDir . '/' . md5(implode('|', [$this->clientId, $this->clientSecret, $this->redirectUri]));
 	}
 
 
@@ -224,7 +224,7 @@ class Neoship
 		return $this->getApiUrl() . '/oauth/v2/auth?' . http_build_query([
 			'client_id' => $this->getClientId(),
 			'response_type' => 'code',
-			'redirect_uri' => $this->getRedirectUrl(),
+			'redirect_uri' => $this->getRedirectUri(),
 		]);
 	}
 
@@ -262,7 +262,7 @@ class Neoship
 			'client_secret' => $this->getClientSecret(),
 			'grant_type' => 'authorization_code',
 			'code' => $code,
-			'redirect_uri' => $this->getRedirectUrl(),
+			'redirect_uri' => $this->getRedirectUri(),
 		]);
 
 		try {

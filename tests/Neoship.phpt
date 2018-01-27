@@ -23,7 +23,7 @@ $neoship->setToken('abc', 'xyz', 3600, 'bearer', NULL);
 
 Assert::same('123', $neoship->getClientId());
 Assert::same('456', $neoship->getClientSecret());
-Assert::same('http://example.org', $neoship->getRedirectUrl());
+Assert::same('http://example.org', $neoship->getRedirectUri());
 Assert::same($tempDir, $neoship->getTempDir());
 Assert::same(Neoship::API_URL_DEVELOPMENT, $neoship->getApiUrl());
 Assert::same(Neoship::API_URL_DEVELOPMENT . '/oauth/v2/auth?client_id=123&response_type=code&redirect_uri=http%3A%2F%2Fexample.org', $neoship->getAuthorizationUrl());
@@ -42,7 +42,7 @@ Assert::same([
 
 Assert::exception(function () use ($tempDir) {
 	new Neoship('123', '456', 'NON_VALID_URL', Neoship::API_URL_DEVELOPMENT, $tempDir);
-}, '\Neoship\NeoshipException', 'Invalid redirect URL format');
+}, '\Neoship\NeoshipException', 'Invalid redirect URI format');
 
 Assert::exception(function () use ($tempDir) {
 	new Neoship('123', '456', 'http://example.org', 'NON_VALID_URL', $tempDir);
