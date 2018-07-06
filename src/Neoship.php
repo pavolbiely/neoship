@@ -341,7 +341,7 @@ class Neoship
 			$data = [];
 		}
 
-		$url = $this->getApiUrl() . '/api/rest/' . $name . '/?' . http_build_query($params);
+		$url = $this->getApiUrl() . '/api/rest/' . $name . '?' . http_build_query($params);
 
 		switch ($type) {
 			case 'GET':
@@ -365,7 +365,7 @@ class Neoship
 	 */
 	public function apiGetLog()
 	{
-		return $this->sendApiRequest('log', 'GET');
+		return $this->sendApiRequest('log/', 'GET');
 	}
 
 
@@ -399,7 +399,7 @@ class Neoship
 	 */
 	public function apiGetUser()
 	{
-		return $this->sendApiRequest('user', 'GET');
+		return $this->sendApiRequest('user/', 'GET');
 	}
 
 
@@ -410,7 +410,7 @@ class Neoship
 	 */
 	public function apiGetState()
 	{
-		return $this->sendApiRequest('state', 'GET');
+		return $this->sendApiRequest('state/', 'GET');
 	}
 
 
@@ -421,7 +421,7 @@ class Neoship
 	 */
 	public function apiGetCurrency()
 	{
-		return $this->sendApiRequest('currency', 'GET');
+		return $this->sendApiRequest('currency/', 'GET');
 	}
 
 
@@ -433,7 +433,7 @@ class Neoship
 	 */
 	public function apiGetStatus(int $id)
 	{
-		return $this->sendApiRequest('status', 'GET');
+		return $this->sendApiRequest('status/' . $id, 'GET');
 	}
 
 
@@ -494,7 +494,7 @@ class Neoship
 	 */
 	public function apiPostPackage(Package $package)
 	{
-		return $this->sendApiRequest('package', 'POST', $package->asArray());
+		return $this->sendApiRequest('package/', 'POST', $package->asArray());
 	}
 
 
