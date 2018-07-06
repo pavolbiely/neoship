@@ -111,26 +111,26 @@ Assert::exception(function () use ($package) {
 $package->setNotifications([$package::NOTIFICATION_EMAIL, $package::NOTIFICATION_SMS]);
 Assert::same([
 	'package' => [
-		'id' => 123,
+		//'id' => 123,
 		'variableNumber' => '1201800002',
 		'mainPackageNumber' => '1201800001',
 		'cashOnDeliveryPrice' => 10.0,
 		'cashOnDeliveryPayment' => 'VIAMO',
-		'cashOnDeliveryCurrency' => [
+		/*'cashOnDeliveryCurrency' => [
 			'id' => 1,
 			'name' => 'Euro',
 			'code' => 'EUR',
 			'symbol' => '€',
 			'rate' => 1,
-		],
+		],*/
 		'insurance' => 2500.0,
-		'insuranceCurrency' => [
+		/*'insuranceCurrency' => [
 			'id' => 1,
 			'name' => 'Euro',
 			'code' => 'EUR',
 			'symbol' => '€',
 			'rate' => 1,
-		],
+		],*/
 		'notification' => 'email,sms',
 		'trackingNumber' => '232323',
 		'weight' => 2.3,

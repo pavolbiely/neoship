@@ -693,7 +693,7 @@ class Package
 		$package = [];
 
 		if ($this->id) {
-			$package['id'] = $this->getId();
+			//$package['id'] = $this->getId(); // results in error 500 from remote server
 		}
 
 		// variable number / order number
@@ -708,29 +708,47 @@ class Package
 		if ($this->cashOnDelivery) {
 			$package['cashOnDeliveryPrice'] = $this->cashOnDelivery->getPrice();
 			$package['cashOnDeliveryPayment'] = $this->cashOnDelivery->getType();
-			$package['cashOnDeliveryCurrency'] = $this->cashOnDelivery::CURRENCIES[$this->cashOnDelivery->getCurrency()];
+			//$package['cashOnDeliveryCurrency'] = $this->cashOnDelivery::CURRENCIES[$this->cashOnDelivery->getCurrency()]; // results in error 500 from remote server
 		}
 
 		// package insurance
 		if ($this->insurance) {
 			$package['insurance'] = $this->insurance->getPrice();
-			$package['insuranceCurrency'] = $this->insurance::CURRENCIES[$this->insurance->getCurrency()];
+			//$package['insuranceCurrency'] = $this->insurance::CURRENCIES[$this->insurance->getCurrency()]; // results in error 500 from remote server
 		}
 
-		// notifications & tracking
+		// notifications
 		$package['notification'] = implode(',', $this->getNotifications());
-		$package['trackingNumber'] = $this->getTrackingNumber();
 
-		// additional package info
-		$package['weight'] = $this->getWeight();
-		$package['barCode'] = $this->getBarcode();
+		// got tracking number?
+		if ($this->trackingNumber) {
+			$package['trackingNumber'] = $this->getTrackingNumber();
+		}
 
-		// special services
-		$package['express'] = $this->getExpress();
-		$package['saturdayDelivery'] = $this->getSaturdayDelivery() ? 1 : 0;
+		// weight info available?
+		if ($this->weight) {
+			$package['weight'] = $this->getWeight();
+		}
+
+		// bar code present?
+		if ($this->barcode) {
+			$package['barCode'] = $this->getBarcode();
+		}
+
+		// express delivery?
+		if ($this->express) {
+			$package['express'] = $this->getExpress();
+		}
+
+		// saturday delivery?
+		if ($this->saturdayDelivery) {
+			$package['saturdayDelivery'] = (int) $this->getSaturdayDelivery();
+		}
 
 		// hold delivery?
-		$package['holdDelivery'] = $this->getHoldDelivery() ? 1 : 0;
+		if ($this->holdDelivery) {
+			$package['holdDelivery'] = (int) $this->getHoldDelivery();
+		}
 
 		// packagemat
 		if ($this->packageMatRecipient) {

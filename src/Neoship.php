@@ -341,7 +341,7 @@ class Neoship
 			$data = [];
 		}
 
-		$url = $this->getApiUrl() . '/api/rest/' . $name . '?' . http_build_query($params);
+		$url = $this->getApiUrl() . '/api/rest/' . $name . '/?' . http_build_query($params);
 
 		switch ($type) {
 			case 'GET':
