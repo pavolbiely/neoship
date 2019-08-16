@@ -4,7 +4,7 @@ namespace Neoship;
 
 class Neoship
 {
-	const API_URL_PRODUCTION = 'https://www.neoship.sk';
+	const API_URL_PRODUCTION = 'https://api.neoship.sk';
 	const API_URL_DEVELOPMENT = 'http://test.neoship.sk';
 
 	/* @var string */
@@ -341,7 +341,7 @@ class Neoship
 			$data = [];
 		}
 
-		$url = $this->getApiUrl() . '/api/rest/' . $name . '?' . http_build_query($params);
+		$url = $this->getApiUrl() . '/' . $name . '?' . http_build_query($params);
 
 		switch ($type) {
 			case 'GET':
