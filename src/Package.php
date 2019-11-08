@@ -708,13 +708,21 @@ class Package
 		if ($this->cashOnDelivery) {
 			$package['cashOnDeliveryPrice'] = $this->cashOnDelivery->getPrice();
 			$package['cashOnDeliveryPayment'] = $this->cashOnDelivery->getType();
-			//$package['cashOnDeliveryCurrency'] = $this->cashOnDelivery::CURRENCIES[$this->cashOnDelivery->getCurrency()]; // results in error 500 from remote server
+
+			$currencyId = $this->cashOnDelivery->getCurrency();
+			if ($currencyId > 1) {
+				$package['cashOnDeliveryCurrency'] = $this->cashOnDelivery::CURRENCIES[$currencyId];
+			}
 		}
 
 		// package insurance
 		if ($this->insurance) {
 			$package['insurance'] = $this->insurance->getPrice();
-			//$package['insuranceCurrency'] = $this->insurance::CURRENCIES[$this->insurance->getCurrency()]; // results in error 500 from remote server
+
+			$currencyId = $this->insurance->getCurrency();
+			if ($currencyId > 1) {
+				$package['insuranceCurrency'] = $this->insurance::CURRENCIES[$currencyId];
+			}
 		}
 
 		// notifications
