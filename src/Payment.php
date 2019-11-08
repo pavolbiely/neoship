@@ -15,7 +15,7 @@ class Payment
 			'rate' => 1,
 		],
 		self::CURRENCY_CZK => [
-			'id' => self::CURRENCY_EUR,
+			'id' => self::CURRENCY_CZK,
 			'name' => 'Česká koruna',
 			'code' => 'CZK',
 			'symbol' => 'Kč',
