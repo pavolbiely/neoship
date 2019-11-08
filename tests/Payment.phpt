@@ -1,19 +1,16 @@
 <?php declare(strict_types=1);
 
 use Tester\Assert,
-	Neoship\Payment;
+	Neoship\Payment,
+	Neoship\Currency;
 
 require __DIR__ . '/bootstrap.php';
 
-$payment = new Payment(100.0, Payment::CURRENCY_CZK, Payment::TYPE_CARD);
+$payment = new Payment(100.0, new Currency(1, 'Euro', 'EUR', '€', 1.0), Payment::TYPE_CARD);
 
 Assert::same(100.0, $payment->getPrice());
-Assert::same($payment::CURRENCY_CZK, $payment->getCurrency());
+Assert::true($payment->getCurrency() instanceof Currency);
 Assert::same($payment::TYPE_CARD, $payment->getType());
-
-Assert::exception(function () use ($payment) {
-	$payment->setCurrency(999);
-}, '\Neoship\NeoshipException', "Currency type '999' not found");
 
 Assert::exception(function () use ($payment) {
 	$payment->setType('TEST');

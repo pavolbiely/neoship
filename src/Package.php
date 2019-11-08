@@ -709,9 +709,9 @@ class Package
 			$package['cashOnDeliveryPrice'] = $this->cashOnDelivery->getPrice();
 			$package['cashOnDeliveryPayment'] = $this->cashOnDelivery->getType();
 
-			$currencyId = $this->cashOnDelivery->getCurrency();
-			if ($currencyId > 1) {
-				$package['cashOnDeliveryCurrency'] = $this->cashOnDelivery::CURRENCIES[$currencyId];
+			$currency = $this->cashOnDelivery->getCurrency();
+			if ($currency !== null && $currency->getId() > 1) {
+				$package['cashOnDeliveryCurrency'] = $currency->asArray();
 			}
 		}
 
@@ -719,9 +719,9 @@ class Package
 		if ($this->insurance) {
 			$package['insurance'] = $this->insurance->getPrice();
 
-			$currencyId = $this->insurance->getCurrency();
-			if ($currencyId > 1) {
-				$package['insuranceCurrency'] = $this->insurance::CURRENCIES[$currencyId];
+			$currency = $this->insurance->getCurrency();
+			if ($currency !== null && $currency->getId() > 1) {
+				$package['insuranceCurrency'] = $currency->asArray();
 			}
 		}
 

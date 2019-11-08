@@ -53,6 +53,12 @@ foreach ($neoship->apiGetState() as $item) {
 	$countries[$item->code] = $item->id;
 }
 
+// get all currencies list
+$currencies = [];
+foreach ($neoship->apiGetCurrency() as $item) {
+	$currencies[$item->code] = new Currency($item->id, $item->name, $item->code, $item->symbol, $item->rate);
+}
+
 // prepare sender and recipient addresses
 $sender = new Address('Harry Potter', 'Webtec', 'Magnetová 1', '831 04', 'Bratislava', $countries['SK']);
 $recipient = new Address('Albus Dumbledore', 'Neonus', 'Miestneho priemyslu 1247', '029 01', 'Námestovo', $countries['SK']);
@@ -61,7 +67,7 @@ $recipient = new Address('Albus Dumbledore', 'Neonus', 'Miestneho priemyslu 1247
 $package = new Package(123, $recipient, $sender, '1201800002');
 
 // use the following code if the package is sent by cash on delivery payment
-$cashOnDelivery = new Payment(10.0, Payment::CURRENCY_EUR, Payment::TYPE_VIAMO);
+$cashOnDelivery = new Payment(10.0, $currencies['EUR'], Payment::TYPE_VIAMO);
 $package->setCashOnDelivery($cashOnDelivery);
 
 // use the following code if the package is insured

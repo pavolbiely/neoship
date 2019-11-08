@@ -3,14 +3,15 @@
 use Tester\Assert,
 	Neoship\Package,
 	Neoship\Address,
-	Neoship\Payment;
+	Neoship\Payment,
+	Neoship\Currency;
 
 require __DIR__ . '/bootstrap.php';
 
 $sender = new Address('Test Tester', 'Webtec', 'Testovacia 1', '831 04', 'Bratislava', 1);
 $recipient = new Address('Test Tester 2', 'Viamedia SK', 'Testovacia 2', '831 05', 'Bratislava', 1);
-$cashOnDelivery = new Payment(10.0, Payment::CURRENCY_EUR, Payment::TYPE_VIAMO);
-$insurance = new Payment(2500.0);
+$cashOnDelivery = new Payment(10.0, new Currency(1, 'Euro', 'EUR', '€', 1.0), Payment::TYPE_VIAMO);
+$insurance = new Payment(2500.0, new Currency(2, 'Česká Koruna', 'CZK', 'Kč', 27.4));
 
 $package = new Package(123, $sender, $recipient, '1201800002', '1201800001');
 $package->setPrice(100.0, 20);
@@ -124,13 +125,13 @@ Assert::same([
 			'rate' => 1,
 		],*/
 		'insurance' => 2500.0,
-		/*'insuranceCurrency' => [
-			'id' => 1,
-			'name' => 'Euro',
-			'code' => 'EUR',
-			'symbol' => '€',
-			'rate' => 1,
-		],*/
+		'insuranceCurrency' => [
+			'id' => 2,
+			'name' => 'Česká Koruna',
+			'code' => 'CZK',
+			'symbol' => 'Kč',
+			'rate' => 27.4,
+		],
 		'notification' => 'email,sms',
 		'trackingNumber' => '232323',
 		'weight' => 2.3,

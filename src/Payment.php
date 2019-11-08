@@ -4,25 +4,6 @@ namespace Neoship;
 
 class Payment
 {
-	const CURRENCY_EUR = 1;
-	const CURRENCY_CZK = 2;
-	const CURRENCIES = [
-		self::CURRENCY_EUR => [
-			'id' => self::CURRENCY_EUR,
-			'name' => 'Euro',
-			'code' => 'EUR',
-			'symbol' => '€',
-			'rate' => 1,
-		],
-		self::CURRENCY_CZK => [
-			'id' => self::CURRENCY_CZK,
-			'name' => 'Česká koruna',
-			'code' => 'CZK',
-			'symbol' => 'Kč',
-			'rate' => 1,
-		],
-	];
-
 	const TYPE_DEFAULT = '';
 	const TYPE_CARD = 'CARD';
 	const TYPE_VIAMO = 'VIAMO';
@@ -31,7 +12,7 @@ class Payment
 	/* @var float */
 	protected $price;
 
-	/* @var int */
+	/* @var \Neoship\Currency */
 	protected $currency;
 
 	/** @var string */
@@ -44,7 +25,7 @@ class Payment
 	 * @param int
 	 * @param string
 	 */
-	public function __construct(float $price, int $currency = self::CURRENCY_EUR, string $type = self::TYPE_DEFAULT)
+	public function __construct(float $price, Currency $currency, string $type = self::TYPE_DEFAULT)
 	{
 		$this->setPrice($price);
 		$this->setCurrency($currency);
@@ -79,25 +60,19 @@ class Payment
 	/**
 	 * @param int
 	 * @return self
-	 * @throws \Neoship\NeoshipException
 	 */
-	public function setCurrency(int $id): Payment
+	public function setCurrency(Currency $currency = null): Payment
 	{
-		if (isset(self::CURRENCIES[$id])) {
-			$this->currency = $id;
-		} else {
-			throw new NeoshipException("Currency type '" . $id . "' not found");
-		}
-
+		$this->currency = $currency;
 		return $this;
 	}
 
 
 
 	/**
-	 * @return int
+	 * @return \Neoship\Currency
 	 */
-	public function getCurrency(): int
+	public function getCurrency(): ?Currency
 	{
 		return $this->currency;
 	}
