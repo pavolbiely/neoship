@@ -7,8 +7,8 @@ use Tester\Assert,
 
 require __DIR__ . '/bootstrap.php';
 
-$sender = new Address('Test Tester', 'Webtec', 'Testovacia 1', '831 04', 'Bratislava', Address::STATE_SK);
-$recipient = new Address('Test Tester 2', 'Viamedia SK', 'Testovacia 2', '831 05', 'Bratislava', Address::STATE_SK);
+$sender = new Address('Test Tester', 'Webtec', 'Testovacia 1', '831 04', 'Bratislava', 1);
+$recipient = new Address('Test Tester 2', 'Viamedia SK', 'Testovacia 2', '831 05', 'Bratislava', 1);
 $cashOnDelivery = new Payment(10.0, Payment::CURRENCY_EUR, Payment::TYPE_VIAMO);
 $insurance = new Payment(2500.0);
 

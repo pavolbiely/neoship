@@ -47,9 +47,15 @@ As long as the token is valid you can call any API call.
 The following code shows an example of how to send a simple package.
 
 ```php
+// get all countries list
+$countries = [];
+foreach ($neoship->apiGetState() as $item) {
+	$countries[$item->code] = $item->id;
+}
+
 // prepare sender and recipient addresses
-$sender = new Address('Harry Potter', 'Webtec', 'Magnetová 1', '831 04', 'Bratislava', Address::STATE_SK);
-$recipient = new Address('Albus Dumbledore', 'Neonus', 'Miestneho priemyslu 1247', '029 01', 'Námestovo', Address::STATE_SK);
+$sender = new Address('Harry Potter', 'Webtec', 'Magnetová 1', '831 04', 'Bratislava', $countries['SK']);
+$recipient = new Address('Albus Dumbledore', 'Neonus', 'Miestneho priemyslu 1247', '029 01', 'Námestovo', $countries['SK']);
 
 // create package
 $package = new Package(123, $recipient, $sender, '1201800002');

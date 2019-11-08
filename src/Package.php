@@ -791,7 +791,7 @@ class Package
 			'houseNumber' => $sender->getHouseNumber(),
 			'houseNumberExt' => $sender->getHouseNumberExt(),
 			'zIP' => $sender->getZipCode(),
-			'state' => Address::STATES[$sender->getState()]['id'],
+			'state' => $sender->getState(),
 			'email' => $sender->getEmail(),
 			'phone' => $sender->getPhone(),
 		];
@@ -807,7 +807,7 @@ class Package
 			'houseNumber' => $recipient->getHouseNumber(),
 			'houseNumberExt' => $recipient->getHouseNumberExt(),
 			'zIP' => $recipient->getZipCode(),
-			'state' => Address::STATES[$recipient->getState()]['id'],
+			'state' => $recipient->getState(),
 			'email' => $recipient->getEmail(),
 			'phone' => $recipient->getPhone(),
 		];
