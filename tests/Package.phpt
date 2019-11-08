@@ -125,13 +125,7 @@ Assert::same([
 			'rate' => 1,
 		],*/
 		'insurance' => 2500.0,
-		'insuranceCurrency' => [
-			'id' => 2,
-			'name' => 'Česká Koruna',
-			'code' => 'CZK',
-			'symbol' => 'Kč',
-			'rate' => 27.4,
-		],
+		'insuranceCurrency' => 2,
 		'notification' => 'email,sms',
 		'trackingNumber' => '232323',
 		'weight' => 2.3,
