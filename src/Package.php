@@ -711,7 +711,7 @@ class Package
 
 			$currency = $this->cashOnDelivery->getCurrency();
 			if ($currency !== null && $currency->getId() > 1) {
-				$package['cashOnDeliveryCurrency'] = $currency->asArray();
+				$package['cashOnDeliveryCurrency'] = $currency->getId();
 			}
 		}
 
@@ -721,7 +721,7 @@ class Package
 
 			$currency = $this->insurance->getCurrency();
 			if ($currency !== null && $currency->getId() > 1) {
-				$package['insuranceCurrency'] = $currency->asArray();
+				$package['insuranceCurrency'] = $currency->getId();
 			}
 		}
 
